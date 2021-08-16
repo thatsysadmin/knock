@@ -16,13 +16,18 @@
   in {
     defaultPackage.x86_64-linux = nixpkgs.stdenv.mkDerivation {
       pname = "knock";
-      version = "0.1.0-alpha";
+      version = "1.0.0-alpha";
       src = self;
 
       nativeBuildInputs = [ nixpkgs.makeWrapper ];
 
       buildInputs = [
-        (nixpkgs.python3.withPackages(python3Packages: [ python3Packages.python_magic ]))
+        (nixpkgs.python3.withPackages
+          (python3Packages: [
+            python3Packages.python_magic
+            python3Packages.xdg
+          ])
+        )
         libgourou-utils inept-epub
       ];
 

@@ -3,6 +3,7 @@
 import os, sys, argparse, subprocess, magic, shutil
 from pathlib import Path
 from getpass import getpass
+from xdg import xdg_config_home
 
 parser = argparse.ArgumentParser(prog='knock', description='Convert an ACSM file to a DRM-free EPUB file')
 parser.add_argument('acsm_file', metavar='file', type=str, help='the ACSM file to convert')
@@ -12,7 +13,7 @@ args = parser.parse_args()
 args.acsm_file = Path(args.acsm_file).expanduser().resolve()
 args.drm_file = args.acsm_file.with_suffix('.drm')
 args.epub_file = args.acsm_file.with_suffix('.epub')
-args.adobe_dir = Path('~/.config/knock').expanduser()
+args.adobe_dir = xdg_config_home() / 'knock'
 
 if not args.acsm_file.exists():
     sys.exit(f'ERROR: {str(args.acsm_file)} does not exist.')
