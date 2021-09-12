@@ -62,7 +62,7 @@ def handle_acsm(acsm_path):
 
     run([
         decryption_command,
-        str(args.adobe_dir.joinpath('activation.xml')),
+        str(args.adobe_dir / 'activation.xml'),
         str(args.drm_file),
         str(args.epub_file)
     ])
