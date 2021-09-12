@@ -7,12 +7,16 @@
 
     inept-epub.url = "github:BentonEdmondson/inept-epub";
     inept-epub.inputs.nixpkgs.follows = "nixpkgs";
+
+    benpkgs.url = "github:BentonEdmondson/benpkgs";
+    benpkgs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, ... }@flakes: let
     nixpkgs = flakes.nixpkgs.legacyPackages.x86_64-linux;
     libgourou-utils = flakes.libgourou-utils.defaultPackage.x86_64-linux;
     inept-epub = flakes.inept-epub.defaultPackage.x86_64-linux;
+    benpkgs = flakes.benpkgs.packages.x86_64-linux;
   in {
     defaultPackage.x86_64-linux = nixpkgs.python3Packages.buildPythonApplication {
       pname = "knock";
@@ -25,6 +29,8 @@
         nixpkgs.python3Packages.click
         libgourou-utils
         inept-epub
+        benpkgs.Audible
+        benpkgs.AAXtoMP3
       ];
 
       format = "other";

@@ -1,21 +1,20 @@
 from xdg import xdg_config_home
 import click, sys, shutil, subprocess
-from run import run
+from utils import run
 
 def handle_acsm(acsm_path):
     drm_path = acsm_path.with_suffix('.drm')
-    adobe_dir = xdg_config_home() / 'knock' / 'acsm'
+    adobe_dir = xdg_config_home().joinpath('knock', 'acsm')
+    adobe_dir.mkdir(parents=True, exist_ok=True)
 
     if drm_path.exists():
         click.echo(f"Error: {drm_path} must be moved out of the way or deleted.", err=True)
         sys.exit(1)
 
-    adobe_dir.mkdir(parents=True, exist_ok=True)
-
     if (
-        not (adobe_dir / 'device.xml').exists()
-        or not (adobe_dir / 'activation.xml').exists()
-        or not (adobe_dir / 'devicesalt').exists()
+        not adobe_dir.joinpath('device.xml').exists()
+        or not adobe_dir.joinpath('activation.xml').exists()
+        or not adobe_dir.joinpath('devicesalt').exists()
     ):
         shutil.rmtree(str(adobe_dir))
         click.echo('This device is not registered with Adobe.')
@@ -33,7 +32,7 @@ def handle_acsm(acsm_path):
             cleanser=lambda:shutil.rmtree(str(adobe_dir))
         )
 
-    click.echo('Downloading the EPUB file from Adobe...')
+    click.echo('Downloading the book from Adobe...')
 
     run([
         'adept-download',
@@ -44,29 +43,34 @@ def handle_acsm(acsm_path):
         '-f', str(acsm_path)
     ])
 
-    drm_file_type = magic.from_file(str(args.drm_file), mime=True)
-    if drm_file_type == 'application/epub+zip':
-        decryption_command = 'inept-epub'
-    elif drm_file_type == 'application/pdf':
-        decryption_command = 'inept-pdf'
+    drm_path_type = magic.from_file(str(drm_path), mime=True)
+    if drm_path_type == 'application/epub+zip':
+        file_type = 'EPUB'
+    elif drm_path_type == 'application/pdf':
+        file_type = 'PDF'
     else:
-        click.echo(f'Error: Received file of media type {drm_file_type}.', err=True)
+        click.echo(f'Error: Received file of media type {drm_path_type}.', err=True)
         click.echo('Only the following ACSM conversions are currently supported:', err=True)
         click.echo('  * ACSM -> EPUB', err=True)
         click.echo('  * ACSM -> PDF', err=True)
         click.echo('Please open a feature request at:', err=True)
-        click.echo(f'  https://github.com/BentonEdmondson/knock/issues/new?title=Support%20{drm_file_type}%20Files&labels=enhancement', err=True)
+        click.echo(f'  https://github.com/BentonEdmondson/knock/issues/new?title=Support%20{drm_path_type}%20Files&labels=enhancement', err=True)
+        sys.exit(1)
+
+    output_file = acsm_path.with_suffix(file_type)
+    if output_file.exists():
+        click.echo(f"Error: {output_file} must be moved out of the way or deleted.", err=True)
         sys.exit(1)
 
     click.echo('Decrypting the file...')
 
     run([
-        decryption_command,
-        str(args.adobe_dir / 'activation.xml'),
-        str(args.drm_file),
-        str(args.epub_file)
+        'inept-' + file_type.lower(),
+        str(adobe_dir.joinpath('activation.xml')),
+        str(drm_path),
+        str(output_file)
     ])
 
-    args.drm_file.unlink()
+    drm_path.unlink()
 
-    click.secho(f'DRM-free EPUB file created:\n{str(args.epub_file)}', color='green')
+    click.secho(f'DRM-free {file_type} file created:\n{output_file}', fg='green')
