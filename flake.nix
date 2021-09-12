@@ -14,28 +14,25 @@
     libgourou-utils = flakes.libgourou-utils.defaultPackage.x86_64-linux;
     inept-epub = flakes.inept-epub.defaultPackage.x86_64-linux;
   in {
-    defaultPackage.x86_64-linux = nixpkgs.stdenv.mkDerivation {
+    defaultPackage.x86_64-linux = nixpkgs.python3Packages.buildPythonApplication {
       pname = "knock";
       version = "1.0.0-alpha";
       src = self;
 
-      nativeBuildInputs = [ nixpkgs.makeWrapper ];
-
-      buildInputs = [
-        (nixpkgs.python3.withPackages
-          (python3Packages: [
-            python3Packages.python_magic
-            python3Packages.xdg
-          ])
-        )
-        libgourou-utils inept-epub
+      propagatedBuildInputs = [
+        nixpkgs.python3Packages.python_magic
+        nixpkgs.python3Packages.xdg
+        nixpkgs.python3Packages.click
+        libgourou-utils
+        inept-epub
       ];
 
+      format = "other";
+
       installPhase = ''
-        mkdir -p $out/bin
-        chmod +x knock
-        cp knock $out/bin
-        wrapProgram $out/bin/knock --prefix PATH : ${nixpkgs.lib.makeBinPath [libgourou-utils inept-epub]}
+        mkdir -p $out/bin $out/${nixpkgs.python3.sitePackages}
+        cp lib/*.py $out/${nixpkgs.python3.sitePackages}
+        cp src/knock.py $out/bin/knock
       '';
 
       meta = {
