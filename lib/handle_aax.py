@@ -31,7 +31,7 @@ def handle_aax(aax_path):
         password = click.prompt("Enter your Audible account's password", hide_input=True)
         locale = click.prompt("Enter your locale (e.g. 'us', 'ca', 'jp', etc)")
 
-        open_fake_terminal(f'Authenticator.from_login("{email}").get_activation_bytes()')
+        open_fake_terminal(f'audible.auth.Authenticator.from_login("{email}", "{locale}").get_activation_bytes()')
 
         try:
             authcode = audible.auth.Authenticator.from_login(
