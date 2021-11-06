@@ -39,8 +39,8 @@ def main(path):
     else:
         click.echo(f'Error: Files of type {path_type} are not supported.\n', err=True)
         click.echo('Only the following file types are currently supported:', err=True)
-        click.echo('  * ACSM (Adobe)\n')
-        click.echo('  * AAX (Audible)\n')
+        click.echo('  * ACSM (Adobe)\n', err=True)
+        click.echo('  * AAX (Audible)\n', err=True)
         click.echo('Please open a feature request at:', err=True)
         click.echo(f'  https://github.com/BentonEdmondson/knock/issues/new?title=Support%20{path_type}%20Files&labels=enhancement', err=True)
         sys.exit(1)

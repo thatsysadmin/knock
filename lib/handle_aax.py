@@ -9,19 +9,9 @@ def handle_aax(aax_path):
     authcode_path.parent.mkdir(parents=True, exist_ok=True)
 
     m4b_path = aax_path.with_suffix('.m4b')
-    cover_path = aax_path.parent.joinpath('cover.jpg')
-    chapters_path = aax_path.with_suffix('.chapters.txt')
 
     if m4b_path.exists():
         click.echo(f"Error: {m4b_path} must be moved out of the way or deleted.", err=True)
-        sys.exit(1)
-
-    if cover_path.exists():
-        click.echo(f"Error: {cover_path} must be moved out of the way or deleted.", err=True)
-        sys.exit(1)
-
-    if chapters_path.exists():
-        click.echo(f"Error: {chapters_path} must be moved out of the way or deleted.", err=True)
         sys.exit(1)
 
     if not authcode_path.exists():
@@ -50,20 +40,12 @@ def handle_aax(aax_path):
 
     authcode = authcode_path.read_text()
 
-    def cleanup():
-        cover_path.unlink(missing_ok=True)
-        chapters_path.unlink(missing_ok=True)
-
     run([
-        'AAXtoMP3',
-        '--authcode', authcode,
-        '-e:m4b',
-        '-t', str(aax_path.parent),
-        '-D', '.',
-        '-F', str(aax_path.stem),
-        str(aax_path)
-    ], cleanser=cleanup)
-
-    cleanup()
+        'ffmpeg',
+        '-activation_bytes', authcode,
+        '-i', str(aax_path),
+        '-c', 'copy', str(m4b_path),
+        '-loglevel', 'error'
+    ])
 
     click.secho(f'DRM-free M4B file created:\n{aax_path.with_suffix(".m4b")}', fg='green')

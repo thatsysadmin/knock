@@ -2,13 +2,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    libgourou-utils.url = "github:BentonEdmondson/libgourou-utils";
-    libgourou-utils.inputs.nixpkgs.follows = "nixpkgs";
-
     inept-epub.url = "github:BentonEdmondson/inept-epub";
     inept-epub.inputs.nixpkgs.follows = "nixpkgs";
 
-    benpkgs.url = "github:BentonEdmondson/benpkgs";
+    benpkgs.url = "git+file:///home/benton/git/benpkgs";
     benpkgs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -18,19 +15,24 @@
     inept-epub = flakes.inept-epub.defaultPackage.x86_64-linux;
     benpkgs = flakes.benpkgs.packages.x86_64-linux;
   in {
-    defaultPackage.x86_64-linux = nixpkgs.python3Packages.buildPythonApplication {
+    defaultPackage.x86_64-linux = nixpkgs.python3Packages.buildPythonApplication rec {
       pname = "knock";
       version = "1.0.0-alpha";
-      src = self;
+      src = ./.;
+
+      nativeBuildInputs = [ nixpkgs.makeWrapper ];
+
+      buildInputs = [
+        inept-epub
+        benpkgs.libgourou
+        nixpkgs.ffmpeg
+      ];
 
       propagatedBuildInputs = [
         nixpkgs.python3Packages.python_magic
         nixpkgs.python3Packages.xdg
         nixpkgs.python3Packages.click
-        libgourou-utils
-        inept-epub
         benpkgs.Audible
-        benpkgs.AAXtoMP3
       ];
 
       format = "other";
@@ -39,6 +41,7 @@
         mkdir -p $out/bin $out/${nixpkgs.python3.sitePackages}
         cp lib/*.py $out/${nixpkgs.python3.sitePackages}
         cp src/knock.py $out/bin/knock
+        wrapProgram $out/bin/knock --prefix PATH : ${nixpkgs.lib.makeBinPath buildInputs}
       '';
 
       meta = {
