@@ -7,43 +7,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1633315458,
-        "narHash": "sha256-CKlsbD3I+CduADnEbPZV+LD4ByQ0RiDy39F3z6DKOQc=",
-        "type": "git",
-        "url": "file:///home/benton/git/benpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/benton/git/benpkgs"
-      }
-    },
-    "inept-epub": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1628616743,
-        "narHash": "sha256-XNka+o/55SYOtDUXXOTmDvX4Qiqbaz4COq+JZ8MPoe8=",
+        "lastModified": 1638237664,
+        "narHash": "sha256-9SkZPl1EZ1ezWZoMdhYOzPm2HK0Ca5hkfphjlPNk/FY=",
         "owner": "BentonEdmondson",
-        "repo": "inept-epub",
-        "rev": "d6ba98a7159f61e7b77dc17c8c6bb62e193c8831",
+        "repo": "benpkgs",
+        "rev": "da71a3a488de3ae7ab8daff2c2a9354d2f0464bf",
         "type": "github"
       },
       "original": {
         "owner": "BentonEdmondson",
-        "repo": "inept-epub",
+        "repo": "benpkgs",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1633080050,
-        "narHash": "sha256-T9I2WnlUzAIL70dk9V1jqaYk3nypy/cMkWR19S47ZHc=",
+        "lastModified": 1638198142,
+        "narHash": "sha256-plU9b8r4St6q4U7VHtG9V7oF8k9fIpfXl/KDaZLuY9k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "82155ff501c7622cb2336646bb62f7624261f6d7",
+        "rev": "8a308775674e178495767df90c419425474582a1",
         "type": "github"
       },
       "original": {
@@ -53,11 +36,31 @@
         "type": "github"
       }
     },
+    "rmdrm": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1638240151,
+        "narHash": "sha256-2FHEb4xaskyLdS5M/eILue74Idplve9g8FRxg9D1Z/4=",
+        "owner": "BentonEdmondson",
+        "repo": "rmdrm",
+        "rev": "c60eaa0c4338be5ee6165f59f2a1816566aba8a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BentonEdmondson",
+        "repo": "rmdrm",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "benpkgs": "benpkgs",
-        "inept-epub": "inept-epub",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "rmdrm": "rmdrm"
       }
     }
   },

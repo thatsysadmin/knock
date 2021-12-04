@@ -2,37 +2,37 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    inept-epub.url = "github:BentonEdmondson/inept-epub";
-    inept-epub.inputs.nixpkgs.follows = "nixpkgs";
+    rmdrm.url = "github:BentonEdmondson/rmdrm";
+    rmdrm.inputs.nixpkgs.follows = "nixpkgs";
 
-    benpkgs.url = "git+file:///home/benton/git/benpkgs";
+    benpkgs.url = "github:BentonEdmondson/benpkgs";
     benpkgs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, ... }@flakes: let
+  outputs = flakes: let
     nixpkgs = flakes.nixpkgs.legacyPackages.x86_64-linux;
     libgourou-utils = flakes.libgourou-utils.defaultPackage.x86_64-linux;
-    inept-epub = flakes.inept-epub.defaultPackage.x86_64-linux;
+    rmdrm = flakes.rmdrm.defaultPackage.x86_64-linux;
     benpkgs = flakes.benpkgs.packages.x86_64-linux;
   in {
     defaultPackage.x86_64-linux = nixpkgs.python3Packages.buildPythonApplication rec {
       pname = "knock";
-      version = "1.0.0-alpha";
+      version = "1.1.0-alpha";
       src = ./.;
 
       nativeBuildInputs = [ nixpkgs.makeWrapper ];
 
       buildInputs = [
-        inept-epub
+        rmdrm
         benpkgs.libgourou
         nixpkgs.ffmpeg
       ];
 
       propagatedBuildInputs = [
+        benpkgs.Audible
         nixpkgs.python3Packages.python_magic
         nixpkgs.python3Packages.xdg
         nixpkgs.python3Packages.click
-        benpkgs.Audible
       ];
 
       format = "other";
@@ -42,10 +42,10 @@
         cp lib/*.py $out/${nixpkgs.python3.sitePackages}
         cp src/knock.py $out/bin/knock
         wrapProgram $out/bin/knock --prefix PATH : ${nixpkgs.lib.makeBinPath buildInputs}
-      '';
+      #'';
 
       meta = {
-        description = "A CLI tool to convert ACSM files to DRM-free EPUB files";
+        description = "A CLI tool to convert ACSM files to DRM-free EPUB/PDF files";
         homepage = "https://github.com/BentonEdmondson/knock";
         license = [ nixpkgs.lib.licenses.gpl3Only ];
         maintainers = [{

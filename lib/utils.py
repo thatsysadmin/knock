@@ -38,3 +38,8 @@ def close_fake_terminal(exit_code: int, cleanser = lambda: None):
         cleanser()
         click.echo(f'Error: Command returned error code {exit_code}.', err=True)
         sys.exit(1)
+
+def verify_absence_of(file_path):
+    if m4b_path.exists():
+        click.echo(f"Error: {file_path} must be moved out of the way or deleted.", err=True)
+        sys.exit(1)

@@ -48,4 +48,4 @@ def handle_aax(aax_path):
         '-loglevel', 'error'
     ])
 
-    click.secho(f'DRM-free M4B file created:\n{aax_path.with_suffix(".m4b")}', fg='green')
+    click.secho(f'DRM-free M4B file created:\n{m4b_path}', fg='green')
