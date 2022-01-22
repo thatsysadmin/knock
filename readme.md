@@ -31,6 +31,7 @@ Perform the following conversions with one command:
         echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf
         sudo reboot
         ```
+        If you receive an error that says something like `E_AUTH_FAILED http://adeactivate.adobe.com/adept/SignInDirect xxxx@xxxxxxxx.com CUS05051` then you might have over (at least) 10 digit password for Adobe. Try changing it to 10 digit password and try the command again.
 
     1. Optionally move the executable to `~/bin` (for your user) or `/usr/local/bin/` (for all users) to allow it to run from anywhere (might not work on some distributions)
 
