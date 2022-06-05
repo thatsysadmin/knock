@@ -29,6 +29,7 @@ int main(int argc, char** argv) try {
         knock_data
     );
 
+    std::cout << "anonymously signing in..." << std::endl;
     processor->signIn("anonymous", "");
     processor->activateDevice();
 
@@ -67,7 +68,7 @@ int main(int argc, char** argv) try {
         std::filesystem::rename(out_file, ext_file);
     }
 
-    std::cout << "DRM-free " + file_type + " file generated at " + ext_file << std::endl;
+    std::cout << file_type + " file generated at " + ext_file << std::endl;
 
     return 0;
 
