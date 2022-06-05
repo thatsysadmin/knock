@@ -1,32 +1,45 @@
 {
   "nodes": {
-    "benpkgs": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+    "base64-src": {
+      "flake": false,
       "locked": {
-        "lastModified": 1638237664,
-        "narHash": "sha256-9SkZPl1EZ1ezWZoMdhYOzPm2HK0Ca5hkfphjlPNk/FY=",
-        "owner": "BentonEdmondson",
-        "repo": "benpkgs",
-        "rev": "da71a3a488de3ae7ab8daff2c2a9354d2f0464bf",
-        "type": "github"
+        "lastModified": 1468170709,
+        "narHash": "sha256-dt6i1j0rqH7lA+2XXp9KTEhj2GvYueyGrHh9VXBEsbw=",
+        "ref": "master",
+        "rev": "7d5a89229a525452e37504976a73c35fbaf2fe4d",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://gist.github.com/f0fd86b6c73063283afe550bc5d77594.git"
       },
       "original": {
-        "owner": "BentonEdmondson",
-        "repo": "benpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "https://gist.github.com/f0fd86b6c73063283afe550bc5d77594.git"
+      }
+    },
+    "gourou-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650729079,
+        "narHash": "sha256-2ZnuO/fIjSzTK0srFzDAhGNh1hA4lZf3lK4VuFxWXmo=",
+        "ref": "master",
+        "rev": "7b6b1471fefb27e79e06e5d686cb8842c539cd0c",
+        "revCount": 79,
+        "type": "git",
+        "url": "git://soutade.fr/libgourou.git"
+      },
+      "original": {
+        "ref": "master",
+        "type": "git",
+        "url": "git://soutade.fr/libgourou.git"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1638198142,
-        "narHash": "sha256-plU9b8r4St6q4U7VHtG9V7oF8k9fIpfXl/KDaZLuY9k=",
+        "lastModified": 1654230545,
+        "narHash": "sha256-8Vlwf0x8ow6pPOK2a04bT+pxIeRnM1+O0Xv9/CuDzRs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8a308775674e178495767df90c419425474582a1",
+        "rev": "236cc2971ac72acd90f0ae3a797f9f83098b17ec",
         "type": "github"
       },
       "original": {
@@ -36,31 +49,47 @@
         "type": "github"
       }
     },
-    "rmdrm": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+    "pugixml-src": {
+      "flake": false,
       "locked": {
-        "lastModified": 1638240151,
-        "narHash": "sha256-2FHEb4xaskyLdS5M/eILue74Idplve9g8FRxg9D1Z/4=",
-        "owner": "BentonEdmondson",
-        "repo": "rmdrm",
-        "rev": "c60eaa0c4338be5ee6165f59f2a1816566aba8a0",
+        "lastModified": 1644379750,
+        "narHash": "sha256-FLemG9T17n6l7vgb01OmO22BK59jv5uozVHeUnILEEQ=",
+        "owner": "zeux",
+        "repo": "pugixml",
+        "rev": "314baf6605143f1e837209008f490e8559529e1c",
         "type": "github"
       },
       "original": {
-        "owner": "BentonEdmondson",
-        "repo": "rmdrm",
+        "owner": "zeux",
+        "ref": "latest",
+        "repo": "pugixml",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "benpkgs": "benpkgs",
+        "base64-src": "base64-src",
+        "gourou-src": "gourou-src",
         "nixpkgs": "nixpkgs",
-        "rmdrm": "rmdrm"
+        "pugixml-src": "pugixml-src",
+        "updfparser-src": "updfparser-src"
+      }
+    },
+    "updfparser-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647424063,
+        "narHash": "sha256-9dvibKiUbbI4CrmuAaJzlpntT0XdLvdGeC2/WzjlA5U=",
+        "ref": "master",
+        "rev": "9d56c1d0b1ce81aae4c8db9d99a8b5d1f7967bcf",
+        "revCount": 25,
+        "type": "git",
+        "url": "git://soutade.fr/updfparser.git"
+      },
+      "original": {
+        "ref": "master",
+        "type": "git",
+        "url": "git://soutade.fr/updfparser.git"
       }
     }
   },

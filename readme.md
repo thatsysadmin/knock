@@ -1,54 +1,20 @@
 # Knock
 
-Perform the following conversions with one command:
-* ACSM → EPUB
-* ACSM → PDF
-* (Soon: AAX → M4B)
-
-![CLI demonstration](demo.png)
+Convert ACSM files to PDF/EPUBs with one command on Linux ([and MacOS very soon](https://github.com/BentonEdmondson/knock/issues/58)).
 
 *This software does not utilize Adobe Digital Editions nor Wine. It is completely free and open-source software written natively for Linux.*
 
-## Setup and Installation
+## Installation
 
-* For NixOS users, include this flake in your system `flake.nix`. Then run `knock ~/path/to/my-book.acsm` to use.
-    ```nix
-    {
-        inputs.knock.url = "github:BentonEdmondson/knock";
-        outputs = { self, knock }: { /* knock.defaultPackage.x86_64-linux is the package */ };
-    }
-    ```
-* For non-NixOS, use the latest [release](https://github.com/BentonEdmondson/knock/releases). It is large because it includes all dependencies, allowing it to run on any system with an x86_64 Linux kernel. It was built using [`nix bundle`](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-bundle.html). Use it by doing the following:
-    1. Download `knock-version-x86_64-linux` and open a terminal
-    1. Navigate to the folder within which `knock-version-x86_64-linux` resides (e.g. `cd ~/Downloads`)
-    1. Run `mv knock-version-x86_64-linux knock` to rename it to `knock`
-    1. Run `chmod +x knock` to make it executable
-    1. Run `./knock ~/path/to/my-book.acsm` to convert the ebook
-
-        If you receive an error that says something like `./nix/store/...: not found` or `./nix/store/...: No such file or directory` then you might not have user namespaces enabled. Try running the following to fix it:
-
-        ```
-        echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf
-        sudo reboot
-        ```
-        If you receive an error that says something like `E_AUTH_FAILED http://adeactivate.adobe.com/adept/SignInDirect xxxx@xxxxxxxx.com CUS05051` then you might have over (at least) 10 digit password for Adobe. Try changing it to 10 digit password and try the command again.
-
-    1. Optionally move the executable to `~/bin` (for your user) or `/usr/local/bin/` (for all users) to allow it to run from anywhere (might not work on some distributions)
-
-## Recommended Workflows
-
-Before buying your ebook/audiobook, check if it is available for free on [Project Gutenberg](https://gutenberg.org/) (ebooks) or [LibriVox](https://librivox.org/) (audiobooks).
-
-If you're looking for an ebook reader or audiobook player, I recommend [Foliate](https://johnfactotum.github.io/foliate/) for the former and [Cozy](https://cozy.sh/) for the latter.
+* Download the latest [release](https://github.com/BentonEdmondson/knock/releases). Make sure it is the correct version for your architecture (run `uname -m` to check).
+* Rename the binary and make it executable.
+* Run `knock /path/to/book.acsm` to perform the conversion.
 
 ## Verified Book Sources
 
-Knock should work on any ACSM file, but it has been specifically verified to work on ACSM files from the following:
+Knock should work on any ACSM file, but it has been specifically verified to work on ACSM files purchased [eBooks.com](https://www.ebooks.com/en-us/) and [Kobo](https://www.kobo.com/us/en), among others.
 
-* [eBooks.com](https://www.ebooks.com/en-us/)
-* [Rakuten Kobo](https://www.kobo.com/us/en)
-* [Google Books](https://books.google.com/)
-* [Hugendubel.de](https://www.hugendubel.de/de/) (German)
+Before buying your ebook, check if it is available for free on [Project Gutenberg](https://gutenberg.org/).
 
 ## The Name
 
@@ -65,13 +31,26 @@ The name comes from the [D&D 5e spell](https://roll20.net/compendium/dnd5e/Knock
 
 ## Dependencies
 
-* [`libgourou`](http://indefero.soutade.fr/p/libgourou/) for using the ACSM file to download the corresponding encrypted EPUB/PDF file from Adobe's servers
-* [`rmdrm`](https://github.com/BentonEdmondson/rmdrm/) for decrypting the Adobe ADEPT-encrypted EPUB/PDF files
-* [`Audible`](https://github.com/mkb79/Audible) for fetching the Audible decryption key used to decrypt AAX files
-* [`ffmpeg`](https://www.ffmpeg.org/) for converting AAX files to M4B files using the Audible decryption key
+There are no userspace runtime dependencies.
 
-These are already included in all releases and in the Nix flake of course.
+## Building & Contributing
+
+Install [Nix](https://github.com/NixOS/nix) if you don't have it. [Enable flakes](https://nixos.wiki/wiki/Flakes) if you haven't. Run
+
+```
+nix build
+```
+
+to build and
+
+```
+nix flake update
+```
+
+to update libraries.
+
+Test books can be found [here](https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html).
 
 ## License
 
-This software is licensed under GPLv3.
+This software is licensed under GPLv3. The linked libraries have various licenses.
