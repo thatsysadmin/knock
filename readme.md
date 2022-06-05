@@ -33,21 +33,27 @@ The name comes from the [D&D 5e spell](https://roll20.net/compendium/dnd5e/Knock
 
 There are no userspace runtime dependencies.
 
-## Building & Contributing
+## Contributing
 
-Install [Nix](https://github.com/NixOS/nix) if you don't have it. [Enable flakes](https://nixos.wiki/wiki/Flakes) if you haven't. Run
+Install [Nix](https://github.com/NixOS/nix) if you don't have it. Enable [flakes](https://nixos.wiki/wiki/Flakes) if you haven't.
+
+### Building
 
 ```
 nix build
 ```
 
-to build and
+### Updating
 
 ```
 nix flake update
 ```
 
-to update libraries.
+### Testing
+
+```
+./tests/test.py
+```
 
 Test books can be found [here](https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html).
 
