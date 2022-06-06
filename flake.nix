@@ -26,6 +26,7 @@
   outputs = flakes: let
     self = flakes.self.packages.x86_64-linux;
     nixpkgs = flakes.nixpkgs.legacyPackages.x86_64-linux.pkgsStatic;
+    nixpkgs-dyn = flakes.nixpkgs.legacyPackages.x86_64-linux;
     gourou-src = flakes.gourou-src;
     updfparser-src = flakes.updfparser-src;
     base64-src = flakes.base64-src;
@@ -146,5 +147,21 @@
       '' ];
     };
     defaultPackage.x86_64-linux = self.knock;
+    packages.x86_64-linux.tests = nixpkgs-dyn.stdenv.mkDerivation {
+      name = "tests";
+      src = ./tests;
+      buildInputs = [ (nixpkgs-dyn.python3.withPackages(p: [
+        p.beautifulsoup4
+        p.requests
+      ])) ];
+      patchPhase = ''
+        substituteInPlace tests.py --replace "./result/bin/knock" "${self.knock}/bin/knock"
+      '';
+      installPhase = ''
+        mkdir -p $out/bin
+        cp tests.py $out/bin/tests
+        chmod +x $out/bin/tests
+      '';
+    };
   };
 }

@@ -52,7 +52,7 @@ nix flake update
 ### Testing
 
 ```
-./tests/test.py
+nix run .#tests -- ./tests/workspace
 ```
 
 Test books can be found [here](https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html).

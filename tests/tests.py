@@ -1,13 +1,25 @@
-#! /usr/bin/env nix-shell
-#! nix-shell -i python3 -p python3 python310Packages.beautifulsoup4 python310Packages.requests
+#!/usr/bin/env python3
 
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from pathlib import Path
 import requests, sys, subprocess, shutil, os
 
-knock_path = Path(__file__).parent.parent.joinpath("result/bin/knock")
-workspace = Path(__file__).parent.joinpath("workspace")
+knock = Path("./result/bin/knock")
+
+if not knock.exists():
+    print("error: " + str(knock) + " does not exist", file=sys.stderr)
+    sys.exit()
+
+if len(sys.argv) != 2:
+    print(
+        "error: missing required argument: directory in which to perform the tests",
+        file=sys.stderr
+    )
+    sys.exit()
+
+print("Testing " + str(knock))
+workspace = Path(sys.argv[1])
 
 if workspace.exists():
     shutil.rmtree(workspace)
@@ -35,7 +47,7 @@ for i, link in enumerate(links):
     r = requests.get(link)
     open(file, "wb").write(r.content)
 
-    result = subprocess.run([knock_path, file])
+    result = subprocess.run([knock, file])
 
     if result.returncode != 0:
         print("Failed")
