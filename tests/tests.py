@@ -19,8 +19,14 @@ if len(sys.argv) != 2:
     sys.exit()
 
 print("Testing " + str(knock))
-workspace = Path(sys.argv[1])
 
+result = subprocess.run(knock)
+if result.returncode != 0:
+    print("Test failed: knock failed to describe itself")
+    sys.exit()
+print("---")
+
+workspace = Path(sys.argv[1])
 if workspace.exists():
     shutil.rmtree(workspace)
 workspace.mkdir()
@@ -50,7 +56,7 @@ for i, link in enumerate(links):
     result = subprocess.run([knock, file])
 
     if result.returncode != 0:
-        print("Failed")
+        print("Test failed: knock failed to convert a file")
         sys.exit()
 
     print("Success\n---")

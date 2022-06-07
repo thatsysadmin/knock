@@ -3,11 +3,25 @@
 #include "libgourou_common.h"
 #include "libgourou.h"
 
+#ifndef KNOCK_VERSION
+    #error KNOCK_VERSION must be defined
+#endif
+
 std::string get_data_dir();
 void verify_absence(std::string file);
 void verify_presence(std::string file);
 
 int main(int argc, char** argv) try {
+
+    if (argc == 1) {
+        std::cout
+            << "info: knock version " << KNOCK_VERSION << ", libgourou version "
+                << LIBGOUROU_VERSION << "\n"
+            << "usage: " << argv[0] << " [ACSM]" << "\n"
+            << "result: converts file ACSM to a plain EPUB/PDF if present, otherwise prints this"
+            << std::endl;
+        return EXIT_SUCCESS;
+    }
 
     if (argc != 2) {
         throw std::invalid_argument("the ACSM file must be passed as an argument");

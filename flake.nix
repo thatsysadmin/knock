@@ -24,6 +24,7 @@
   };
 
   outputs = flakes: let
+    version = "1.3.0";
     self = flakes.self.packages.x86_64-linux;
     nixpkgs = flakes.nixpkgs.legacyPackages.x86_64-linux.pkgsStatic;
     nixpkgs-dyn = flakes.nixpkgs.legacyPackages.x86_64-linux;
@@ -120,6 +121,7 @@
         ${cxx} \
           -o $out/bin/knock \
           ${./src/knock.cpp} \
+          -D KNOCK_VERSION='"${version}"' \
           -Wl,--as-needed -static \
           ${self.utils-common}/lib/libutils-common.a \
           ${self.gourou}/lib/libgourou.a \
