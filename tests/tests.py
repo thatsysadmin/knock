@@ -45,6 +45,9 @@ for a_tag in soup.find_all('a'):
     
     links.append(a_tag.get("href"))
 
+    if len(links) >= 10:
+        break
+
 for i, link in enumerate(links):
     i = str(i)
     print("Testing URL #" + i + ":\n" + link)
