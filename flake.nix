@@ -2,15 +2,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     gourou-src = {
-      url   = "git://soutade.fr/libgourou.git";
-      type  = "git";
-      ref   = "master";
+      url = "git://soutade.fr/libgourou.git";
       flake = false;
     };
     updfparser-src = {
-      url   = "git://soutade.fr/updfparser.git";
-      type  = "git";
-      ref   = "master";
+      url = "git://soutade.fr/updfparser.git";
       flake = false;
     };
     base64-src = {
@@ -18,8 +14,8 @@
       flake = false;
     };
     pugixml-src = {
-      url   = "github:zeux/pugixml/latest";
-      flake = false;
+      url = "github:zeux/pugixml/latest";
+      flake = false; 
     };
   };
 
@@ -148,7 +144,7 @@
           -I ${self.libzip-static}/include
       '' ];
     };
-    defaultPackage.x86_64-linux = self.knock;
+    packages.x86_64-linux.default = self.knock;
     packages.x86_64-linux.tests = nixpkgs-dyn.stdenv.mkDerivation {
       name = "tests";
       src = ./tests;

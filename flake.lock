@@ -19,16 +19,15 @@
     "gourou-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1650729079,
-        "narHash": "sha256-2ZnuO/fIjSzTK0srFzDAhGNh1hA4lZf3lK4VuFxWXmo=",
+        "lastModified": 1654435760,
+        "narHash": "sha256-X94UbSwAp3rtioC8FCgJcOlVNZ5rvaAeIIVlKocFwus=",
         "ref": "master",
-        "rev": "7b6b1471fefb27e79e06e5d686cb8842c539cd0c",
-        "revCount": 79,
+        "rev": "4f288f4e241e3cc711a10fdcf4078fd4ddfab7c2",
+        "revCount": 81,
         "type": "git",
         "url": "git://soutade.fr/libgourou.git"
       },
       "original": {
-        "ref": "master",
         "type": "git",
         "url": "git://soutade.fr/libgourou.git"
       }
@@ -87,7 +86,6 @@
         "url": "git://soutade.fr/updfparser.git"
       },
       "original": {
-        "ref": "master",
         "type": "git",
         "url": "git://soutade.fr/updfparser.git"
       }
