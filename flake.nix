@@ -181,24 +181,11 @@
           chmod +x $out/bin/tests
         '';
       };
-      devShell.x86_64-linux = nixpkgs.mkShell {
-        packages = [
-          # nix formatter
-          nixpkgs-dyn.nixpkgs-fmt
-          # python formatter
-          nixpkgs-dyn.black
-          # cpp formatter
-          nixpkgs-dyn.clang-tools
-        ];
-        shellHook = ''
-          fmt () {
-            set -ex
-            nixpkgs-fmt .
-            black ./tests
-            clang-format -i --verbose src/*.cpp
-            set +ex
-          }
-        '';
-      };
+      packages.x86_64-linux.formatter = nixpkgs.writeShellScriptBin "formatter" ''
+        set -x
+        ${nixpkgs-dyn.clang-tools}/bin/clang-format -i --verbose ./src/*.cpp
+        ${nixpkgs-dyn.nixpkgs-fmt}/bin/nixpkgs-fmt .
+        ${nixpkgs-dyn.black}/bin/black ./tests
+      '';
     };
 }

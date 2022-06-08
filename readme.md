@@ -47,9 +47,7 @@ Test books can be found [here](https://www.adobe.com/solutions/ebook/digital-edi
 ### Formatting
 
 ```
-nix develop
-fmt
-exit
+nix run .#formatter
 ```
 
 ## The Name
