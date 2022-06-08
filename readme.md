@@ -44,6 +44,14 @@ nix run .#tests -- ./tests/workspace
 
 Test books can be found [here](https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html).
 
+### Formatting
+
+```
+nix develop
+fmt
+exit
+```
+
 ## The Name
 
 The name comes from the [D&D 5e spell](https://roll20.net/compendium/dnd5e/Knock#content) for freeing locked items:

@@ -14,7 +14,7 @@ if not knock.exists():
 if len(sys.argv) != 2:
     print(
         "error: missing required argument: directory in which to perform the tests",
-        file=sys.stderr
+        file=sys.stderr,
     )
     sys.exit()
 
@@ -31,18 +31,18 @@ if workspace.exists():
     shutil.rmtree(workspace)
 workspace.mkdir()
 
-html = requests \
-    .get("https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html") \
-    .text
-soup = BeautifulSoup(html, 'html.parser')
+html = requests.get(
+    "https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html"
+).text
+soup = BeautifulSoup(html, "html.parser")
 
 links = []
-for a_tag in soup.find_all('a'):
+for a_tag in soup.find_all("a"):
     if a_tag.string != "Download eBook":
         continue
     if not urlparse(a_tag.get("href")).path.endswith(".acsm"):
         continue
-    
+
     links.append(a_tag.get("href"))
 
     if len(links) >= 10:
