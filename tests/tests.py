@@ -17,6 +17,7 @@ if len(sys.argv) != 2:
         file=sys.stderr,
     )
     sys.exit()
+workspace = Path(sys.argv[1])
 
 print("Testing " + str(knock))
 
@@ -25,11 +26,6 @@ if result.returncode != 0:
     print("Test failed: knock failed to describe itself")
     sys.exit()
 print("---")
-
-workspace = Path(sys.argv[1])
-if workspace.exists():
-    shutil.rmtree(workspace)
-workspace.mkdir()
 
 html = requests.get(
     "https://www.adobe.com/solutions/ebook/digital-editions/sample-ebook-library.html"
@@ -48,20 +44,27 @@ for a_tag in soup.find_all("a"):
     if len(links) >= 10:
         break
 
-for i, link in enumerate(links):
-    i = str(i)
-    print("Testing URL #" + i + ":\n" + link)
-    file = workspace.joinpath(i + ".acsm")
+for time in ["first", "second"]:
 
-    r = requests.get(link)
-    open(file, "wb").write(r.content)
+    if workspace.exists():
+        shutil.rmtree(workspace)
+    workspace.mkdir()
 
-    result = subprocess.run([knock, file])
+    for i, link in enumerate(links):
+        i = str(i)
 
-    if result.returncode != 0:
-        print("Test failed: knock failed to convert a file")
-        sys.exit()
+        print("Testing URL #" + i + " for the " + time + " time:\n" + link)
+        file = workspace.joinpath(i + ".acsm")
 
-    print("Success\n---")
+        r = requests.get(link)
+        open(file, "wb").write(r.content)
+
+        result = subprocess.run([knock, file])
+
+        if result.returncode != 0:
+            print("Test failed: knock failed to convert a file")
+            sys.exit()
+
+        print("Success\n---")
 
 print("All tests passed")
