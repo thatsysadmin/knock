@@ -82,6 +82,7 @@ int main(int argc, char **argv) try {
     std::filesystem::rename(out_file, ext_file);
   }
 
+  std::filesystem::remove(acsm_file);
   std::cout << file_type + " file generated at " + ext_file << std::endl;
 
   return 0;
