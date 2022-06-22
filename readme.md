@@ -2,7 +2,7 @@
 
 Convert ACSM files to PDF/EPUBs with one command on Linux ([and MacOS very soon](https://github.com/BentonEdmondson/knock/issues/58)).
 
-![Demonstration of CLI usage](./assets/demo.svg)
+![Demonstration of CLI usage](./assets/demo.png)
 
 *This software does not utilize Adobe Digital Editions nor Wine. It is completely free and open-source software written natively for Linux.*
 
