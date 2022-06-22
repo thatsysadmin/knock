@@ -2,13 +2,28 @@
 
 Convert ACSM files to PDF/EPUBs with one command on Linux ([and MacOS very soon](https://github.com/BentonEdmondson/knock/issues/58)).
 
+![Demonstration of CLI usage](./assets/demo.svg)
+
 *This software does not utilize Adobe Digital Editions nor Wine. It is completely free and open-source software written natively for Linux.*
 
 ## Installation
 
-* Download the latest [release](https://github.com/BentonEdmondson/knock/releases). Make sure it is the correct version for your architecture (run `uname -m` to check).
-* Rename the binary and make it executable.
-* Run `knock /path/to/book.acsm` to perform the conversion.
+1. Run `uname -ms` and, based on the output, download the latest corresponding [release](https://github.com/BentonEdmondson/knock/releases).
+1. Open a terminal and `cd` into the directory that knock is in (e.g. `cd ~/Downloads`).
+1. Run `mv knock-version-arch-os knock` to rename the binary to `knock`.
+1. Run `chmod +x knock` to make it executable.
+1. Run `./knock ./path/to/book.acsm` to perform the conversion.
+1. Run `mv knock ~/.local/bin` to allow it to be run from anywhere (might not work on some distributions).
+
+### Nix and NixOS (with [flakes](https://nixos.wiki/wiki/Flakes) enabled)
+
+If you are on a system with [Nix](https://github.com/NixOS/nix), you can use the following.
+
+```
+nix profile install github:BentonEdmondson/knock
+```
+
+If you are on [NixOS](https://github.com/NixOS/nixpkgs), you can add the flake to your system config.
 
 ## Dependencies
 
