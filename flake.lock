@@ -16,6 +16,21 @@
         "url": "https://gist.github.com/f0fd86b6c73063283afe550bc5d77594.git"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "gourou-src": {
       "flake": false,
       "locked": {
@@ -68,6 +83,7 @@
     "root": {
       "inputs": {
         "base64-src": "base64-src",
+        "flake-utils": "flake-utils",
         "gourou-src": "gourou-src",
         "nixpkgs": "nixpkgs",
         "pugixml-src": "pugixml-src",
