@@ -9,7 +9,7 @@ Convert ACSM files to PDF/EPUBs with one command on Linux ([and MacOS very soon]
 ## Installation
 
 1. Run `uname -ms` and, based on the output, download the latest corresponding [release](https://github.com/BentonEdmondson/knock/releases).
-1. Open a terminal and `cd` into the directory that knock is in (e.g. `cd ~/Downloads`).
+1. `cd` into the directory that knock is in (e.g. `cd ~/Downloads`).
 1. Run `mv knock-version-arch-os knock` to rename the binary to `knock`.
 1. Run `chmod +x knock` to make it executable.
 1. Run `./knock ./path/to/book.acsm` to perform the conversion.
