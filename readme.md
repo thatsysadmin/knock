@@ -6,6 +6,10 @@ Convert ACSM files to PDF/EPUBs with one command on Linux.
 
 *This software does not utilize Adobe Digital Editions nor Wine. It is completely free and open-source software written natively for Linux.*
 
+## Downtime
+
+Knock was taken down between late 2022 and mid-2024 pending a legal concern that has now been resolved.
+
 ## Installation
 
 1. Run `uname -ms` and, based on the output, download the latest corresponding [release](https://github.com/BentonEdmondson/knock/releases).
@@ -81,7 +85,3 @@ The name comes from the [D&D 5e spell](https://roll20.net/compendium/dnd5e/Knock
 ## License
 
 This software is licensed under GPLv3. The linked libraries have various licenses.
-
-## Downtime
-
-Knock was taken down in late 2022 pending a legal concern which has now been resolved.
