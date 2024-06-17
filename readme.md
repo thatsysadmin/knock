@@ -1,6 +1,6 @@
 # Knock
 
-Convert ACSM files to PDF/EPUBs with one command on Linux ([and MacOS very soon](https://github.com/BentonEdmondson/knock/issues/58)).
+Convert ACSM files to PDF/EPUBs with one command on Linux.
 
 ![Demonstration of CLI usage](./assets/demo.png)
 
@@ -81,3 +81,7 @@ The name comes from the [D&D 5e spell](https://roll20.net/compendium/dnd5e/Knock
 ## License
 
 This software is licensed under GPLv3. The linked libraries have various licenses.
+
+## Downtime
+
+Knock was taken down in late 2022 pending a legal concern which has now been resolved.
