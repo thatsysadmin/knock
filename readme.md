@@ -35,7 +35,7 @@ There are no userspace runtime dependencies.
 
 ## Verified Book Sources
 
-Knock should work on any ACSM file, but it has been specifically verified to work on ACSM files purchased [eBooks.com](https://www.ebooks.com/en-us/) and [Kobo](https://www.kobo.com/us/en), among others.
+Knock should work on any ACSM file, but it has been specifically verified to work on ACSM files purchased from [eBooks.com](https://www.ebooks.com/en-us/), [Kobo](https://www.kobo.com/us/en), and [Google Play](https://play.google.com/store/books?hl=en).
 
 Before buying your ebook, check if it is available for free on [Project Gutenberg](https://gutenberg.org/).
 
