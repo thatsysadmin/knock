@@ -144,7 +144,7 @@
                   ${nixpkgs.zlib}/lib/libz.a \
                   ${nixpkgs.openssl.out}/lib/libcrypto.a \
                   ${nixpkgs.curl.out}/lib/libcurl.a \
-		  ${nixpkgs.libpsl.out}/lib/libpsl.a \
+                  ${nixpkgs.libpsl.out}/lib/libpsl.a \
                   ${nixpkgs.openssl.out}/lib/libssl.a \
                   -static-libgcc -static-libstdc++ \
                   -Wl,--end-group \
