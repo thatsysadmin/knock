@@ -24,7 +24,7 @@
     flakes.flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ]
       (system:
         let
-          version = "1.3.1";
+          version = "1.3.2";
           self = flakes.self.packages.${system};
           nixpkgs = flakes.nixpkgs.legacyPackages.${system}.pkgsStatic;
           nixpkgs-dyn = flakes.nixpkgs.legacyPackages.${system};
@@ -35,19 +35,9 @@
           pugixml-src = flakes.pugixml-src;
           cxx = "${nixpkgs.stdenv.cc}/bin/${nixpkgs.stdenv.cc.targetPrefix}c++";
           ar = "${nixpkgs.stdenv.cc.bintools.bintools_bin}/bin/${nixpkgs.stdenv.cc.targetPrefix}ar";
-          obj-flags = "-O2 -static";
+          obj-flags = "-O3 -static";
         in
         rec {
-          packages.libzip-static = nixpkgs.libzip.overrideAttrs (prev: {
-            cmakeFlags = (prev.cmakeFlags or [ ]) ++ [
-              "-DBUILD_SHARED_LIBS=OFF"
-              "-DBUILD_EXAMPLES=OFF"
-              "-DBUILD_DOC=OFF"
-              "-DBUILD_TOOLS=OFF"
-              "-DBUILD_REGRESS=OFF"
-            ];
-            outputs = [ "out" ];
-          });
           packages.base64 = derivation {
             name = "updfparser";
             inherit system;
@@ -119,7 +109,7 @@
                   -I ${nixpkgs.openssl.dev}/include \
                   -I ${nixpkgs.curl.dev}/include \
                   -I ${nixpkgs.zlib.dev}/include \
-                  -I ${self.libzip-static}/include \
+                  -I ${nixpkgs.libzip.dev}/include \
                   ${obj-flags}
                 mkdir -p $out/lib
                 ${ar} crs $out/lib/libutils-common.a *.o
@@ -145,7 +135,7 @@
                   ${self.gourou}/lib/libgourou.a \
                   ${self.updfparser}/lib/libupdfparser.a \
                   -Wl,--start-group \
-                  ${self.libzip-static}/lib/libzip.a \
+                  ${nixpkgs.libzip}/lib/libzip.a \
                   ${nixpkgs.libnghttp2}/lib/libnghttp2.a \
                   ${nixpkgs.libidn2.out}/lib/libidn2.a \
                   ${nixpkgs.libunistring}/lib/libunistring.a \
@@ -154,6 +144,7 @@
                   ${nixpkgs.zlib}/lib/libz.a \
                   ${nixpkgs.openssl.out}/lib/libcrypto.a \
                   ${nixpkgs.curl.out}/lib/libcurl.a \
+		  ${nixpkgs.libpsl.out}/lib/libpsl.a \
                   ${nixpkgs.openssl.out}/lib/libssl.a \
                   -static-libgcc -static-libstdc++ \
                   -Wl,--end-group \
@@ -163,7 +154,7 @@
                   -I ${nixpkgs.openssl.dev}/include \
                   -I ${nixpkgs.curl.dev}/include \
                   -I ${nixpkgs.zlib.dev}/include \
-                  -I ${self.libzip-static}/include
+                  -I ${nixpkgs.libzip.dev}/include
               ''
             ];
           };
