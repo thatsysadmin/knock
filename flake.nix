@@ -38,19 +38,6 @@
           obj-flags = "-O3 -static";
         in
         rec {
-          packages.base64 = derivation {
-            name = "updfparser";
-            inherit system;
-            builder = "${nixpkgs.bash}/bin/bash";
-            PATH = "${nixpkgs.coreutils}/bin";
-            args = [
-              "-c"
-              ''
-                mkdir -p $out/include/base64
-                cp ${base64-src}/Base64.h $out/include/base64/Base64.h
-              ''
-            ];
-          };
           packages.updfparser = derivation {
             name = "updfparser";
             inherit system;
@@ -81,14 +68,13 @@
                   -c \
                   ${gourou-src}/src/!(pugixml).cpp \
                   ${pugixml-src}/src/pugixml.cpp \
-                  -I ${self.base64}/include \
+                  -I ${base64-src} \
                   -I ${gourou-src}/include \
                   -I ${pugixml-src}/src \
                   -I ${updfparser-src}/include \
                   ${obj-flags}
-                mkdir -p $out/lib $out/debug
+                mkdir -p $out/lib
                 ${ar} crs $out/lib/libgourou.a *.o
-                cp *.o $out/debug
               ''
             ];
           };
