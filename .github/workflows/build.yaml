@@ -11,16 +11,17 @@ jobs:
         - os: ubuntu-24.04
           arch: x86_64
           kernel: linux
-        # hopefully possible in the future
+        # hopefully possible in the future but for now there are no arm64 Linux runners
         # - os: ubuntu-
         #   arch: arm64
         #   kernel: linux
         - os: macos-14
           arch: arm64
           kernel: darwin
-        - os: macos-14-large
-          arch: x86_64
-          kernel: darwin
+        # this is the only x86_64 macOS runner and it costs money to use
+        # - os: macos-14-large
+        #   arch: x86_64
+        #   kernel: darwin
     runs-on: ${{ matrix.target.os }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
