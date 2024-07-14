@@ -9,11 +9,11 @@
         "rev": "dceb7af2f73afb7aae20322cca04f27331d2e16a",
         "revCount": 3,
         "type": "git",
-        "url": "https://gist.github.com/f0fd86b6c73063283afe550bc5d77594.git"
+        "url": "https://gist.github.com/tomykaira/f0fd86b6c73063283afe550bc5d77594"
       },
       "original": {
         "type": "git",
-        "url": "https://gist.github.com/f0fd86b6c73063283afe550bc5d77594.git"
+        "url": "https://gist.github.com/tomykaira/f0fd86b6c73063283afe550bc5d77594"
       }
     },
     "flake-utils": {
@@ -23,15 +23,15 @@
       "locked": {
         "lastModified": 1710146030,
         "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
+        "ref": "refs/heads/main",
         "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
-        "type": "github"
+        "revCount": 92,
+        "type": "git",
+        "url": "https://github.com/numtide/flake-utils"
       },
       "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/numtide/flake-utils"
       }
     },
     "gourou-src": {
@@ -43,44 +43,42 @@
         "rev": "81faf1f9bef4d27d8659f2f16b9c65df227ee3d7",
         "revCount": 141,
         "type": "git",
-        "url": "git://soutade.fr/libgourou.git"
+        "url": "https://forge.soutade.fr/soutade/libgourou"
       },
       "original": {
         "type": "git",
-        "url": "git://soutade.fr/libgourou.git"
+        "url": "https://forge.soutade.fr/soutade/libgourou"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1719075281,
-        "narHash": "sha256-CyyxvOwFf12I91PBWz43iGT1kjsf5oi6ax7CrvaMyAo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a71e967ef3694799d0c418c98332f7ff4cc5f6af",
-        "type": "github"
+        "lastModified": 1720928027,
+        "narHash": "sha256-Ze8frbrRJAuEJWVWf9bExMoFshPYhAmp1Nq5VYkzlVU=",
+        "ref": "refs/heads/master",
+        "rev": "048f85c494ef4fcd90889537f78e8548f5abcaf0",
+        "revCount": 652811,
+        "type": "git",
+        "url": "https://github.com/nixos/nixpkgs"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/nixos/nixpkgs"
       }
     },
     "pugixml-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1694112913,
-        "narHash": "sha256-xxtJr9VeBPxpxWJaDGO635+Ch7ZS6t6VyuXEio+ogZ8=",
-        "owner": "zeux",
-        "repo": "pugixml",
-        "rev": "db78afc2b7d8f043b4bc6b185635d949ea2ed2a8",
-        "type": "github"
+        "lastModified": 1720456557,
+        "narHash": "sha256-0KZgn1PASbEb+Xl9XDZI+uifWwKPL6pVC1Lgbnjbet0=",
+        "ref": "refs/heads/master",
+        "rev": "30cc354fe37114ec7a0a4ed2192951690357c2ed",
+        "revCount": 1799,
+        "type": "git",
+        "url": "https://github.com/zeux/pugixml"
       },
       "original": {
-        "owner": "zeux",
-        "ref": "latest",
-        "repo": "pugixml",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/zeux/pugixml"
       }
     },
     "root": {
@@ -117,11 +115,11 @@
         "rev": "6060d123441a06df699eb275ae5ffdd50409b8f3",
         "revCount": 33,
         "type": "git",
-        "url": "git://soutade.fr/updfparser.git"
+        "url": "https://forge.soutade.fr/soutade/updfparser"
       },
       "original": {
         "type": "git",
-        "url": "git://soutade.fr/updfparser.git"
+        "url": "https://forge.soutade.fr/soutade/updfparser"
       }
     }
   },

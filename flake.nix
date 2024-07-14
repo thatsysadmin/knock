@@ -1,21 +1,21 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "git+https://github.com/nixos/nixpkgs";
+    flake-utils.url = "git+https://github.com/numtide/flake-utils";
     gourou-src = {
-      url = "git://soutade.fr/libgourou.git";
+      url = "git+https://forge.soutade.fr/soutade/libgourou";
       flake = false;
     };
     updfparser-src = {
-      url = "git://soutade.fr/updfparser.git";
+      url = "git+https://forge.soutade.fr/soutade/updfparser";
       flake = false;
     };
     base64-src = {
-      url = "git+https://gist.github.com/f0fd86b6c73063283afe550bc5d77594.git";
+      url = "git+https://gist.github.com/tomykaira/f0fd86b6c73063283afe550bc5d77594";
       flake = false;
     };
     pugixml-src = {
-      url = "github:zeux/pugixml/latest";
+      url = "git+https://github.com/zeux/pugixml";
       flake = false;
     };
   };
@@ -24,7 +24,7 @@
     flakes.flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ]
       (system:
         let
-          version = "1.3.2";
+          version = "1.3.3";
           self = flakes.self.packages.${system};
           nixpkgs = flakes.nixpkgs.legacyPackages.${system}.pkgsStatic;
           nixpkgs-dyn = flakes.nixpkgs.legacyPackages.${system};
@@ -116,6 +116,7 @@
                   ${./src/knock.cpp} \
                   -D KNOCK_VERSION='"${version}"' \
                   --std=c++17 \
+                  -Wextra -Wall -s \
                   -Wl,--as-needed -static \
                   ${self.utils-common}/lib/libutils-common.a \
                   ${self.gourou}/lib/libgourou.a \
