@@ -1,7 +1,4 @@
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   strategy:
@@ -28,10 +25,10 @@ jobs:
     - uses: cachix/install-nix-action@ba01fffc512be2cf5d4dce85159f0e40621f84ec
     - run: |
         nix build
-        cp ./result/bin/knock knock.${{ martix.kernel }}.${{ matrix.arch }}
+        cp ./result/bin/knock knock.${{ matrix.kernel }}.${{ matrix.arch }}
     - uses: softprops/action-gh-release@c9b46fe7aad9f02afd89b12450b780f52dacfb2d
         # this condition is down here instead of for the entire file so builds happen even for untagged commits
         if: startsWith(github.ref, 'refs/tags/')
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: knock.${{ martix.kernel }}.${{ matrix.arch }}
+          files: knock.${{ matrix.kernel }}.${{ matrix.arch }}
