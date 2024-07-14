@@ -21,7 +21,7 @@
   };
 
   outputs = flakes:
-    flakes.flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ]
+    flakes.flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ]
       (system:
         let
           version = "1.3.3";

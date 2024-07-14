@@ -4,24 +4,23 @@ permissions:
   contents: write
 
 jobs:
-  strategy:
-    matrix:
-      target:
-      - os: ubuntu-24.04
-        arch: x86_64
-        kernel: linux
-      # hopefully possible in the future
-      # - os: ubuntu-
-      #   arch: arm64
-      #   kernel: linux
-      - os: macos-14
-        arch: arm64
-        kernel: darwin
-      - os: macos-14-large
-        arch: x86_64
-        kernel: darwin
-
   build:
+    strategy:
+      matrix:
+        target:
+        - os: ubuntu-24.04
+          arch: x86_64
+          kernel: linux
+        # hopefully possible in the future
+        # - os: ubuntu-
+        #   arch: arm64
+        #   kernel: linux
+        - os: macos-14
+          arch: arm64
+          kernel: darwin
+        - os: macos-14-large
+          arch: x86_64
+          kernel: darwin
     runs-on: ${{ matrix.target.os }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
