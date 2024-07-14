@@ -21,14 +21,14 @@ jobs:
   build:
     runs-on: ${{ matrix.target.os }}
     steps:
-    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-    - uses: cachix/install-nix-action@ba01fffc512be2cf5d4dce85159f0e40621f84ec
-    - run: |
-        nix build
-        cp ./result/bin/knock knock.${{ matrix.target.kernel }}.${{ matrix.target.arch }}
-    - uses: softprops/action-gh-release@c9b46fe7aad9f02afd89b12450b780f52dacfb2d
-      # this condition is down here instead of for the entire file so builds happen even for untagged commits
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        files: knock.${{ matrix.target.kernel }}.${{ matrix.target.arch }}
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: cachix/install-nix-action@ba01fffc512be2cf5d4dce85159f0e40621f84ec
+      - run: |
+          nix build
+          cp ./result/bin/knock knock.${{ matrix.target.kernel }}.${{ matrix.target.arch }}
+      - uses: softprops/action-gh-release@c9b46fe7aad9f02afd89b12450b780f52dacfb2d
+        # this condition is down here instead of for the entire file so builds happen even for untagged commits
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: knock.${{ matrix.target.kernel }}.${{ matrix.target.arch }}
