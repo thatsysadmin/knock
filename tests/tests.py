@@ -9,14 +9,14 @@ knock = Path("./result/bin/knock")
 
 if not knock.exists():
     print("error: " + str(knock) + " does not exist", file=sys.stderr)
-    sys.exit()
+    sys.exit(1)
 
 if len(sys.argv) != 2:
     print(
         "error: missing required argument: directory in which to perform the tests",
         file=sys.stderr,
     )
-    sys.exit()
+    sys.exit(1)
 workspace = Path(sys.argv[1])
 
 print("Testing " + str(knock))
@@ -24,7 +24,7 @@ print("Testing " + str(knock))
 result = subprocess.run(knock)
 if result.returncode != 0:
     print("Test failed: knock failed to describe itself")
-    sys.exit()
+    sys.exit(1)
 print("---")
 
 html = requests.get(
@@ -63,7 +63,7 @@ for time in ["first", "second"]:
 
         if result.returncode != 0:
             print("Test failed: knock failed to convert a file")
-            sys.exit()
+            sys.exit(1)
 
         print("Success\n---")
 

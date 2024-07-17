@@ -31,6 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - uses: cachix/install-nix-action@ba01fffc512be2cf5d4dce85159f0e40621f84ec
+      - run: nix run .#tests -- ./tests/workspace
       - run: |
           nix build
           cp ./result/bin/knock knock.${{ matrix.target.kernel }}.${{ matrix.target.arch }}
