@@ -24,7 +24,7 @@
     flakes.flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ]
       (system:
         let
-          version = "1.3.3";
+          version = builtins.toString (flakes.self.revCount or "∞ (experimental)");
           self = flakes.self.packages.${system};
           nixpkgs = flakes.nixpkgs.legacyPackages.${system}.pkgsStatic;
           nixpkgs-dyn = flakes.nixpkgs.legacyPackages.${system};
